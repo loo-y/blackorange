@@ -113,11 +113,11 @@ const generateImage = (leftText, rightText)=> {
     // 画左边文字
     cxt.font = [fontWeight, fontSize, fontFamily].join(' ');
     cxt.fillStyle = colorWhite;
-    cxt.fillText(leftText, startX - leftLabel.offsetWidth - leftRightTextMargin, startY + leftLabel.offsetHeight - topBottomTextMargin - topBottomTextMargin/2);
+    cxt.fillText(leftText, startX - leftLabel.offsetWidth - leftRightTextMargin / 2, startY + leftLabel.offsetHeight - topBottomTextMargin - topBottomTextMargin/2);
 
     // 画右边文字
     cxt.fillStyle = colorBlack;
-    cxt.fillText(rightText, startX + leftRightTextMargin, startY + rightLabel.offsetHeight - topBottomTextMargin- topBottomTextMargin/2);
+    cxt.fillText(rightText, startX + leftRightTextMargin / 2, startY + rightLabel.offsetHeight - topBottomTextMargin- topBottomTextMargin/2);
  
     
     replaceCanvasByImage('png', myCanvas);
