@@ -137,13 +137,34 @@ const saveCanvasToLocal = (type, canvasDom, imageName)=>{
         savaFile(imgdata, filename);
 }
 
+const downloadClick = (type, canvasDom, imageName)=>{
+    //判断是否是IE
+    let fileName = (imageName || ''+new Date().getTime())+'.'+type;
+    if (window.navigator.msSaveBlob) {
+        //IE10，IE11 ,Edage
+        let blob = canvasDom.msToBlob();
+        window.navigator.msSaveBlob(blob, fileName);
+    } else {
+        let dataImg = new Image()
+        dataImg.src = canvasDom.toDataURL(`image/${type}`)
+        dataImg.setAttribute('class', 'hidden');
+        document.querySelector('body').appendChild(dataImg);
+        let alink = document.createElement("a");
+        alink.setAttribute('class', 'hidden');
+        alink.href = dataImg.src;
+        alink.download = fileName;
+        alink.click();
+    }
+}
+
 const main = ()=> {
     let leftInput = document.querySelector("#leftInput");
     let rightInput = document.querySelector("#rightInput");
     let generateBtn = document.querySelector("#generateBtn");
     let saveBtnContainer = document.querySelector("#save_btn_container");
     let myCanvasDom = document.querySelector("#myCanvas");
-    saveBtnContainer.addEventListener('click', ()=>{saveCanvasToLocal('png', myCanvasDom)});
+    // saveBtnContainer.addEventListener('click', ()=>{saveCanvasToLocal('png', myCanvasDom)});
+    saveBtnContainer.addEventListener('click', ()=>{downloadClick('png', myCanvasDom)});
 
     generateBtn.addEventListener('click', ()=>{
         let isSuccess = generateImage(leftInput.value, rightInput.value);
