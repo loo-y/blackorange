@@ -29,6 +29,7 @@ const generateImage = (leftText, rightText)=> {
     console.log(rightLabel.offsetHeight, rightLabel.offsetWidth);
 
     let myCanvas = document.querySelector("#myCanvas");
+    myCanvas.setAttribute('class', '');
     let blackViewWdith = myCanvas.offsetWidth;
     let blackViewHeight = myCanvas.offsetHeight;
     let topBottomTextMargin = 4; // 文字上下空隙
@@ -107,6 +108,7 @@ const generateImage = (leftText, rightText)=> {
     cxt.fillStyle = colorBlack;
     cxt.fillText(rightText, startX + leftRightTextMargin, startY + rightLabel.offsetHeight - topBottomTextMargin);
  
+    replaceCanvasByImage('png', myCanvas);
     return true;
 }
 
@@ -134,6 +136,23 @@ const saveCanvasToLocal = (type, canvasDom, imageName)=>{
         };
         var filename = (imageName || ''+new Date().getTime())+'.'+type;
         savaFile(imgdata, filename);
+}
+
+const replaceCanvasByImage = (type, canvasDom)=>{
+    let dataImgId = "dataImg";
+    let canvas_container = document.querySelector(".canvas_container");
+    let dataImg;
+    let hasDataImg = document.querySelector(`#${dataImgId}`);
+    if(hasDataImg){
+        dataImg = document.querySelector(`#${dataImgId}`);
+    }else{
+        dataImg = new Image();
+        dataImg.setAttribute("id", "dataImg");
+        canvas_container.appendChild(dataImg);
+    }
+    dataImg.src = canvasDom.toDataURL(`image/${type}`)
+    canvas_container.appendChild(dataImg);
+    canvasDom.setAttribute('class', 'hidden');
 }
 
 const downloadClick = (type, canvasDom, imageName)=>{
