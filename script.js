@@ -113,7 +113,7 @@ const generateImage = (leftText, rightText)=> {
 }
 
 const saveCanvasToLocal = (type, canvasDom, imageName)=>{
-        let imgdata = canvasDom.toDataURL(type);
+        let imgdata = canvasDom.toDataURL(type, 1);
         //1.0 将mime-type改为image/octet-stream, 强制让浏览器下载
         let fixtype = function(type){
             type = type.toLocaleLowerCase().replace(/jpg/i,'jpeg');
@@ -150,7 +150,7 @@ const replaceCanvasByImage = (type, canvasDom)=>{
         dataImg.setAttribute("id", "dataImg");
         canvas_container.appendChild(dataImg);
     }
-    dataImg.src = canvasDom.toDataURL(`image/${type}`)
+    dataImg.src = canvasDom.toDataURL(`image/${type}`, 1);
     canvas_container.appendChild(dataImg);
     canvasDom.setAttribute('class', 'hidden');
 }
@@ -165,12 +165,12 @@ const downloadClick = (type, canvasDom, imageName)=>{
     } else {
         let dataImg = new Image();
         dataImg.setAttribute("id", "dataImg");
-        dataImg.src = canvasDom.toDataURL(`image/${type}`)
+        dataImg.src = canvasDom.toDataURL(`image/${type}`, 1);
         dataImg.setAttribute('class', 'hidden');
         document.querySelector('body').appendChild(dataImg);
         let alink = document.createElement("a");
         alink.setAttribute('class', 'hidden');
-        alink.href = canvasDom.toDataURL(`image/${type}`);
+        alink.href = canvasDom.toDataURL(`image/${type}`, 1);
         alink.target = "_blank";
         // alink.download = fileName;
         alink.click();
