@@ -9,6 +9,14 @@ const scale = 2;
 
 const generateImage = (leftText, rightText)=> {
     console.log(leftText, rightText);
+    // 移除前后空格
+    leftText = leftText.replace(/^\s*/,'').replace(/\s*$/,'');
+    rightText = rightText.replace(/^\s*/,'').replace(/\s*$/,'');
+    if(!leftText || !rightText){
+        alert("请保证左右两边都有文字");
+        return false;
+    }
+
     let canvas_container_class = "canvas_container";
     let canvasContainer = document.querySelector("." + canvas_container_class);
     canvasContainer.setAttribute('class', canvas_container_class);
@@ -34,14 +42,14 @@ const generateImage = (leftText, rightText)=> {
     let blackViewWdith = myCanvas.offsetWidth;
     let blackViewHeight = myCanvas.offsetHeight;
     let topBottomTextMargin = 4; // 文字上下空隙
-    let leftRightTextMargin = 5; // 文字左右空隙
+    let leftRightTextMargin = 4; // 文字左右空隙
     myCanvas.width = blackViewWdith * scale;
     myCanvas.height = blackViewHeight * scale;
 
     let cxt = myCanvas.getContext("2d");
     cxt.scale(scale, scale);
 
-    let globalreRadius = 8, globalretWdith = rightLabel.offsetWidth + leftRightTextMargin * 2, globalretHeight = rightLabel.offsetHeight + topBottomTextMargin * 2;
+    let globalreRadius = 9, globalretWdith = rightLabel.offsetWidth + leftRightTextMargin * 2, globalretHeight = rightLabel.offsetHeight + topBottomTextMargin * 2;
     //画圆角矩形
     let radius= globalreRadius || 10, //圆角的半径
     retWidth = globalretWdith || 150, //矩形的宽
@@ -105,11 +113,11 @@ const generateImage = (leftText, rightText)=> {
     // 画左边文字
     cxt.font = [fontWeight, fontSize, fontFamily].join(' ');
     cxt.fillStyle = colorWhite;
-    cxt.fillText(leftText, startX - leftLabel.offsetWidth - leftRightTextMargin, startY + leftLabel.offsetHeight - topBottomTextMargin);
+    cxt.fillText(leftText, startX - leftLabel.offsetWidth - leftRightTextMargin, startY + leftLabel.offsetHeight - topBottomTextMargin - topBottomTextMargin/2);
 
     // 画右边文字
     cxt.fillStyle = colorBlack;
-    cxt.fillText(rightText, startX + leftRightTextMargin, startY + rightLabel.offsetHeight - topBottomTextMargin);
+    cxt.fillText(rightText, startX + leftRightTextMargin, startY + rightLabel.offsetHeight - topBottomTextMargin- topBottomTextMargin/2);
  
     
     replaceCanvasByImage('png', myCanvas);
