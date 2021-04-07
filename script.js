@@ -111,20 +111,17 @@ const generateImage = (leftText, rightText)=> {
 }
 
 const saveCanvasToLocal = (type, canvasDom, imageName)=>{
-        //cavas 保存图片到本地  js 实现
-        //------------------------------------------------------------------------
-        //1.确定图片的类型  获取到的图片格式 data:image/Png;base64,......
-        // let type ='png';//你想要什么图片格式 就选什么吧
         let imgdata = canvasDom.toDataURL(type);
-        //2.0 将mime-type改为image/octet-stream,强制让浏览器下载
+        //1.0 将mime-type改为image/octet-stream, 强制让浏览器下载
         let fixtype = function(type){
             type = type.toLocaleLowerCase().replace(/jpg/i,'jpeg');
             let r = type.match(/png|jpeg|bmp|gif/)[0];
             return 'image/'+r;
         };
-        imgdata = imgdata.replace(fixtype(type), 'image/octet-stream');
-        //3.0 将图片保存到本地
-        var savaFile = (data,filename) =>
+        // imgdata = imgdata.replace(fixtype(type), 'image/octet-stream');
+        
+        //2.0 将图片保存到本地
+        let savaFile = (data, filename) =>
         {
             let save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
             save_link.href = data;
@@ -132,9 +129,11 @@ const saveCanvasToLocal = (type, canvasDom, imageName)=>{
             let event = document.createEvent('MouseEvents');
             event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
             save_link.dispatchEvent(event);
+            let blob = new Blob([''], { type: 'application/octet-stream' });
+		    let url = URL.createObjectURL(blob);
+            URL.revokeObjectURL(url);
         };
         var filename = (imageName || ''+new Date().getTime())+'.'+type;
-        //我想用当前秒是可以解决重名的问题了 不行你就换成毫秒
         savaFile(imgdata, filename);
 }
 
@@ -145,7 +144,7 @@ const main = ()=> {
     let saveBtnContainer = document.querySelector("#save_btn_container");
     let myCanvasDom = document.querySelector("#myCanvas");
     saveBtnContainer.addEventListener('click', ()=>{saveCanvasToLocal('png', myCanvasDom)});
-    
+
     generateBtn.addEventListener('click', ()=>{
         let isSuccess = generateImage(leftInput.value, rightInput.value);
         if(isSuccess){
