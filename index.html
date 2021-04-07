@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charSet="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"
+        />
+        <title>Black Orange Image</title>
+        <link rel=stylesheet href='./custom.css' type=text/css />
+    </head>
+    <body class="body">
+        <div class="block">
+            <div class="title">
+                <h2>文字图片生成</h2>
+            </div>
+            <div class="input_container">
+                <div class="left_item input_item">
+                    <input type="text" id="leftInput" placeholder="左边文字" />
+                </div>
+                <div class="right_item input_item">
+                    <input type="text" id="rightInput" placeholder="右边文字" />
+                </div>
+            </div>
+            <div class="button_container">
+                <div class="button generate_btn" id="generateBtn">
+                    <span>生成图片</span>
+                </div>
+            </div>
+            <div class="canvas_container hidden">
+                <canvas id="myCanvas"></canvas>
+            </div>
+            <div id="save_btn_container" class="button_container hidden">
+                <div class="button save_btn" id="saveBtn">
+                    <span>保存图片</span>
+                </div>
+            </div>
+            <div class="label_container invisible">
+                <label id="leftLabel"></label>
+                <label id="rightLabel"></label>
+            </div>
+        </div>
+        <script type="module" src="./script.js"></script>
+    </body>
+</html>
