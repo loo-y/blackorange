@@ -119,7 +119,6 @@ const saveCanvasToLocal = (type, canvasDom, imageName)=>{
             return 'image/'+r;
         };
         // imgdata = imgdata.replace(fixtype(type), 'image/octet-stream');
-        
         //2.0 将图片保存到本地
         let savaFile = (data, filename) =>
         {
@@ -145,15 +144,18 @@ const downloadClick = (type, canvasDom, imageName)=>{
         let blob = canvasDom.msToBlob();
         window.navigator.msSaveBlob(blob, fileName);
     } else {
-        let dataImg = new Image()
+        let dataImg = new Image();
+        dataImg.setAttribute("id", "dataImg");
         dataImg.src = canvasDom.toDataURL(`image/${type}`)
         dataImg.setAttribute('class', 'hidden');
         document.querySelector('body').appendChild(dataImg);
         let alink = document.createElement("a");
         alink.setAttribute('class', 'hidden');
-        alink.href = dataImg.src;
-        alink.download = fileName;
+        alink.href = canvasDom.toDataURL(`image/${type}`);
+        alink.target = "_blank";
+        // alink.download = fileName;
         alink.click();
+        document.querySelector("#dataImg").remove();
     }
 }
 
