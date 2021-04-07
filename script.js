@@ -5,6 +5,7 @@ const fontWeight = `600`; // bold
 const colorBlack = `#000`;
 const colorWhite = `#fff`;
 const colorOrange = `#fe9b02`;
+const scale = 2;
 
 const generateImage = (leftText, rightText)=> {
     console.log(leftText, rightText);
@@ -34,11 +35,12 @@ const generateImage = (leftText, rightText)=> {
     let blackViewHeight = myCanvas.offsetHeight;
     let topBottomTextMargin = 4; // 文字上下空隙
     let leftRightTextMargin = 5; // 文字左右空隙
-    myCanvas.width = blackViewWdith;
-    myCanvas.height = blackViewHeight;
+    myCanvas.width = blackViewWdith * scale;
+    myCanvas.height = blackViewHeight * scale;
 
     let cxt = myCanvas.getContext("2d");
-    
+    cxt.scale(scale, scale);
+
     let globalreRadius = 8, globalretWdith = rightLabel.offsetWidth + leftRightTextMargin * 2, globalretHeight = rightLabel.offsetHeight + topBottomTextMargin * 2;
     //画圆角矩形
     let radius= globalreRadius || 10, //圆角的半径
@@ -69,6 +71,7 @@ const generateImage = (leftText, rightText)=> {
 
     console.log(myCanvas.offsetWidth, myCanvas.offsetHeight, myCanvas.width, myCanvas.height)
     console.log("startX:", startX, "startY:", startY, "radius:", radius);
+    
     // 右边文字背景
     cxt.fillStyle = colorOrange;
     cxt.moveTo(startX+radius, startY);
@@ -108,6 +111,7 @@ const generateImage = (leftText, rightText)=> {
     cxt.fillStyle = colorBlack;
     cxt.fillText(rightText, startX + leftRightTextMargin, startY + rightLabel.offsetHeight - topBottomTextMargin);
  
+    
     replaceCanvasByImage('png', myCanvas);
     return true;
 }
@@ -150,7 +154,11 @@ const replaceCanvasByImage = (type, canvasDom)=>{
         dataImg.setAttribute("id", "dataImg");
         canvas_container.appendChild(dataImg);
     }
+    
     dataImg.src = canvasDom.toDataURL(`image/${type}`, 1);
+    dataImg.width = canvasDom.width / scale;
+    dataImg.height = canvasDom.height / scale;
+
     canvas_container.appendChild(dataImg);
     canvasDom.setAttribute('class', 'hidden');
 }
