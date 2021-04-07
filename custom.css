@@ -1,0 +1,92 @@
+.block{
+    width: 400px;
+    overflow: hidden;
+}
+
+.hidden{
+    display: none !important;
+    
+}
+
+.invisible{
+    visibility: hidden !important;
+}
+
+.title{
+    width: 100%;
+    text-align: center;
+}
+
+.title h2{
+    display: inline-block;
+}
+
+.input_container{
+    height: 50px;
+    padding: 0 32px;
+}
+
+.input_item{
+    box-sizing: border-box;
+    width: 45%;
+}
+
+.left_item{
+    float: left;
+}
+.right_item{
+    float: right;
+}
+
+.input_item input{
+    box-sizing: border-box;
+    min-height: 2em;
+    border-radius: 2px;
+    margin: 0px;
+    outline: none;
+    height: 43px;
+    padding: 7px 5px;
+    border: 0 none;
+    border-bottom: 1px solid rgb(191, 191, 191);
+    border-image: initial;
+    width: 100%;
+    vertical-align: top;
+    color: #333;
+    font-size: 15px;
+}
+
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+    color: #ccc
+}
+
+.button_container{
+    text-align: center;
+    height: 56px;
+    background-color: #fff;
+    position: relative;
+    margin-top: 16px;
+    width: 100%;
+    z-index: 900;
+}
+
+.button_container .button{
+    cursor: pointer;
+    margin: 16px 32px;
+    background: #0086f6;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 500;
+    text-align: center;
+    font-family: "PingFang SC";
+}
+
+.canvas_container, .label_container{
+    padding: 0 32px;
+}
+
+.canvas_container canvas{
+    width: 100%;
+    height: 200px;
+}
