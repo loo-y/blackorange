@@ -197,12 +197,12 @@ const main = ()=> {
 
     generateBtn.addEventListener('click', ()=>{
         let isSuccess = generateImage(leftInput.value, rightInput.value);
-        if(isSuccess){
-            saveBtnContainer.setAttribute("class", "button_container");
+        // if(isSuccess){
+        //     saveBtnContainer.setAttribute("class", "button_container");
             
-        }else{
-            saveBtnContainer.setAttribute("class", "button_container hidden");
-        }
+        // }else{
+        //     saveBtnContainer.setAttribute("class", "button_container hidden");
+        // }
     });
 }
 
