@@ -1,7 +1,9 @@
 body{
     background: #fff;
 }
-
+.body{
+    background: #fff;
+}
 .block{
     width: 100%;
     overflow: hidden;
